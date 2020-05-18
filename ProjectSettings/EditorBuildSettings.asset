@@ -4,5 +4,8 @@
 EditorBuildSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 2
-  m_Scenes: []
+  m_Scenes:
+  - enabled: 1
+    path: Assets/Scenes/BlueBrick.unity
+    guid: 39aa4182ab8a2914fa74a8e2f02c00ca
   m_configObjects: {}

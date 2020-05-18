@@ -555,10 +555,10 @@ PlayerSettings:
   metroCertificatePassword: 
   metroCertificateSubject: DefaultCompany
   metroCertificateIssuer: DefaultCompany
-  metroCertificateNotAfter: 806404557f4bd701
+  metroCertificateNotAfter: 0056bc879b4bd701
   metroApplicationDescription: Template_3D
   wsaImages: {}
-  metroTileShortName: 
+  metroTileShortName: MakingThingsTalk
   metroTileShowName: 0
   metroMediumTileShowName: 0
   metroLargeTileShowName: 0

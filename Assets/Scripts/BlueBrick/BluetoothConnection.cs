@@ -26,7 +26,7 @@ public class BluetoothConnection : MonoBehaviour
 	private bool isFaulted = false;
 	private string errReported = "";
 
-	
+
 
 
 #if WINDOWS_UWP
@@ -35,6 +35,10 @@ public class BluetoothConnection : MonoBehaviour
 #endif
 
 	#endregion Private Variables
+
+	// lines from the arduino sketch
+	// SERVICE_UUID          "6E400001-B5A3-F393-E0A9-E50E24DCCA9E"  // UART service UUID
+	// IMU_CHARACTERISTIC_NT "6E400003-B5A3-F393-E0A9-E50E24DCCA9E"
 
 
 	// Start is called before the first frame update
@@ -52,8 +56,8 @@ public class BluetoothConnection : MonoBehaviour
 		{
 			deviceListText.text = PrintAddressBook();
 
-			GetComponentInChildren<ShowTheWorld>().MenuKeys = addressBook.Keys.ToArray();
-			GetComponentInChildren<ShowTheWorld>().MenuNames = addressBook.Values.ToArray();
+			GetComponentInChildren<BubbleMenu>().MenuKeys = addressBook.Keys.ToArray();
+			GetComponentInChildren<BubbleMenu>().MenuNames = addressBook.Values.ToArray();
 			addressBookHasChanged = false;
 		}
 
@@ -95,7 +99,17 @@ public class BluetoothConnection : MonoBehaviour
 	}
 
 
+
 #if WINDOWS_UWP
+
+
+
+
+
+
+
+
+
 	private void HandleWatcher(BluetoothLEAdvertisementReceivedEventArgs watcherArgs)
 	{
 		string _name = watcherArgs.Advertisement.LocalName;
@@ -106,10 +120,9 @@ public class BluetoothConnection : MonoBehaviour
 			_name = btAddr.ToString();
 		}
 		
-
 		KeyValuePair<ulong, string> watcherResult = new KeyValuePair<ulong, string>(btAddr, _name);
-		AddOrUpdateDevice(watcherResult);
 
+		AddOrUpdateDevice(watcherResult);
 
 		// check for connectability
 		try
@@ -133,8 +146,11 @@ public class BluetoothConnection : MonoBehaviour
 			Debug.Log("device connection attempt failed...");
 		}
 
-
 	}
+
+
+
+
 
 	private void AddOrUpdateDevice(KeyValuePair<ulong,string> kvp)
 	{
@@ -146,6 +162,7 @@ public class BluetoothConnection : MonoBehaviour
 			{
 				addressBook[kvp.Key] = kvp.Value;
 				addressBookHasChanged = true;
+
 				Debug.Log("Updated address book: " + kvp.Key.ToString() + " is " + kvp.Value);
 			}
 			
@@ -155,9 +172,12 @@ public class BluetoothConnection : MonoBehaviour
 			addressBook.Add(kvp.Key, kvp.Value);
 			addressBookHasChanged = true;
 
-			//Debug.Log("Added new address: " + _name);
+			Debug.Log("Added new address: " + kvp.Value);
 		}
 	}
+
+
+
 
 
 	private void WatcherOnReceived(BluetoothLEAdvertisementWatcher sender, BluetoothLEAdvertisementReceivedEventArgs args)
@@ -177,6 +197,13 @@ public class BluetoothConnection : MonoBehaviour
 	{
 		return await BluetoothLEDevice.FromBluetoothAddressAsync(btAddress);
 	}
+
+
+
+
+
+
+
 
 #endif
 }

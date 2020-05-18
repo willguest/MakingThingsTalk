@@ -5,7 +5,7 @@ using System.IO;
 using System.Linq;
 using UnityEngine;
 
-public class ShowTheWorld : MonoBehaviour {
+public class BubbleMenu : MonoBehaviour {
 
     public GameObject MenuItemPrefab;
 

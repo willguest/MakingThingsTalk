@@ -547,7 +547,7 @@ MonoBehaviour:
     m_FontStyle: 0
     m_BestFit: 1
     m_MinSize: 10
-    m_MaxSize: 40
+    m_MaxSize: 100
     m_Alignment: 0
     m_AlignByGeometry: 0
     m_RichText: 0
@@ -2172,13 +2172,13 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1691200992}
-  m_LocalRotation: {x: 0.40821788, y: -0.23456968, z: 0.10938163, w: 0.8754261}
+  m_LocalRotation: {x: 0.2577544, y: 0.12306387, z: 0.07287177, w: 0.9555667}
   m_LocalPosition: {x: 284.50003, y: 160.01779, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
   m_RootOrder: 1
-  m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
+  m_LocalEulerAnglesHint: {x: 28.338001, y: 18.053001, z: 13.315001}
 --- !u!1 &1699045181
 GameObject:
   m_ObjectHideFlags: 0
@@ -2189,7 +2189,6 @@ GameObject:
   m_Component:
   - component: {fileID: 1699045183}
   - component: {fileID: 1699045182}
-  - component: {fileID: 1699045184}
   m_Layer: 0
   m_Name: M2MQTT
   m_TagString: Untagged
@@ -2240,26 +2239,6 @@ Transform:
   m_Father: {fileID: 0}
   m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!114 &1699045184
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 1699045181}
-  m_Enabled: 0
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 99b434fa74e2558418191d40e93a4e5f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  brokerAddress: localhost
-  brokerPort: 1883
-  isEncrypted: 0
-  connectionDelay: 500
-  timeoutOnConnection: 30000
-  autoConnect: 0
-  mqttUserName: 
-  mqttPassword: 
 --- !u!1 &1740149081
 GameObject:
   m_ObjectHideFlags: 0

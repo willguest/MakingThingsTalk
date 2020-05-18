@@ -336,6 +336,12 @@ PrefabInstance:
       propertyPath: targetTransform
       value: 
       objectReference: {fileID: 365297984}
+    - target: {fileID: 1108407927916279610, guid: 410b89467b54dc94db89bfc5a4ac17d7,
+        type: 3}
+      propertyPath: MenuItemPrefab
+      value: 
+      objectReference: {fileID: 7943704498626934769, guid: 7c9629e2e8f75814d847f29b8b297e72,
+        type: 3}
     - target: {fileID: 2935296712557739681, guid: 410b89467b54dc94db89bfc5a4ac17d7,
         type: 3}
       propertyPath: m_Layer

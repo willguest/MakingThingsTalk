@@ -8,9 +8,11 @@ using System.Linq;
 using System.Text;
 
 
+
 #if WINDOWS_UWP
 using Windows.Devices.Bluetooth;
 using Windows.Devices.Enumeration;
+using Windows.Devices.Bluetooth.GenericAttributeProfile;
 #endif
 
 public class BubbleClickHandler : MonoBehaviour {
@@ -20,16 +22,22 @@ public class BubbleClickHandler : MonoBehaviour {
 
 	private bool deviceHasChanged = false;
 	private string newDeviceInfo = "";
-	private bool isPairing = false;
+
+	private DataHandler _dh;
+
 
 #if WINDOWS_UWP
 	private BluetoothLEDevice myDevice;
 	private DeviceInformation myInformation;
+	private bool isPairing = false;
+
+	
 #endif
 
 	void Start () {
 
 		rootNode = transform.parent.gameObject;
+		_dh = new DataHandler();
 	}
 
 	void Update()
@@ -42,6 +50,10 @@ public class BubbleClickHandler : MonoBehaviour {
 			{
 				GetComponentInChildren<TextMesh>().fontSize = 20;
 				GetComponentInChildren<TextMesh>().text = newDeviceInfo;
+#if WINDOWS_UWP
+				// use the device object to get data from the characteristic
+				SubscribeToIMUCharacteristic(myDevice);
+#endif
 				deviceHasChanged = false;
 			}
 			else
@@ -50,6 +62,9 @@ public class BubbleClickHandler : MonoBehaviour {
 			}
 		}
 	}
+
+
+
 
 #if WINDOWS_UWP
 	public void OnDoubleClick()
@@ -99,6 +114,34 @@ public class BubbleClickHandler : MonoBehaviour {
 
 		isPairing = false;
 		return devInfo;
+	}
+
+
+
+	private Task SubscribeToIMUCharacteristic(BluetoothLEDevice device)
+	{
+		GattDeviceService service = _dh.TryGetService(device, new Guid("6E400001-B5A3-F393-E0A9-E50E24DCCA9E"));
+		if (service == null) { return null; }
+
+		GattCharacteristic charac = _dh.TryGetCharacteristic(service, new Guid("6E400003-B5A3-F393-E0A9-E50E24DCCA9E"));
+		if (charac == null) { return null; }
+
+		_dh.Notify_Characteristic(charac, GattClientCharacteristicConfigurationDescriptorValue.Notify);
+
+		_dh.OnImuDataReceived += ReceiveImuData;
+		Debug.Log("Data event linked to function");
+
+		return null;
+	}
+
+	private void ReceiveImuData(byte[] _byte)
+	{
+		Debug.Log(_byte.Length + " bytes received");
+
+		// It is left as an exercise for the student
+		// to convert this byte array into a quaterion 
+		// and link it to the local rotation property 
+		// of the blue brick.
 	}
 
 
